@@ -1,17 +1,29 @@
-# all
-all: lcs
+CXX = g++
+CXXFLAGS =  -O2 -DNDEBUG
+DEFS =
 
-# link
-lcs: cmatrix.o lcs.o
-	g++ cmatrix.o lcs.o -o lcs
+SOURCE = \
+        lcs.cpp cmatrix.cpp
 
-# compile
-cmatrix.o: cmatrix.cpp
-	g++ -c cmatrix.cpp -o cmatrix.o
+OBJECT = \
+        lcs.o cmatrix.o
 
-lcs.o: lcs.cpp
-	g++ -c lcs.cpp -o lcs.o
+EXE = \
+        lcs
+INCLUDES = -I. -I./include
 
-# clean
+LIBDIRS = -L./lib
+
+LIBS =  -lpthread
+
+all:
+        $(CXX) $(CXXFLAGS) $(DEFS) $(INCLUDES) -c $(SOURCE)
+        $(CXX) $(LIBDIRS) $(OBJECT) $(LIBS) $(INCLUDE) -o $(EXE)
+        rm *.o
+
+lcs.o:
+        lcs.cpp
+cmatrix.o:
+        cmatrix.cpp
 clean:
-	rm -rf *.o lcs
+        rm *.o
